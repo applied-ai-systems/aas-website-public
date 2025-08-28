@@ -49,10 +49,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
-          path: |
-            .next/
-            out/
+          path: .next/
           retention-days: 7
+        if: always()
 
   performance-test:
     name: Performance & Accessibility
@@ -79,7 +78,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v10
         with:
           configPath: './lighthouserc.json'
-          uploadArtifacts: true
+          uploadArtifacts: false
 
   security-scan:
     name: Security Scanning
@@ -94,13 +93,7 @@ jobs:
         with:
           scan-type: 'fs'
           scan-ref: '.'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-
-      - name: Upload Trivy scan results
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: 'trivy-results.sarif'
+          format: 'table'
 
   deploy-preview:
     name: Deploy Preview
