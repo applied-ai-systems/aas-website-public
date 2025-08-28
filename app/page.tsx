@@ -64,10 +64,10 @@ export default function Home() {
             Technical Solutions
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-300">
-            SAM.gov registered contractor delivering specialized AI, data
-            engineering, and systems architecture solutions. From defense
-            intelligence systems to commercial space applications - accelerating
-            mission success through advanced technology.
+            Specialized technical solutions for defense, aerospace, and
+            government missions. From intelligence systems to commercial space
+            applications - accelerating mission success through advanced
+            technology.
           </p>
           <div className="mt-10 flex justify-center gap-x-6">
             <a
@@ -94,8 +94,7 @@ export default function Home() {
               Defense & Government Solutions
             </h2>
             <p className="mt-4 text-lg text-slate-300">
-              SAM.gov registered contractor specializing in classified and
-              sensitive mission systems
+              Advanced solutions for classified and sensitive mission systems
             </p>
           </div>
 
@@ -175,31 +174,10 @@ export default function Home() {
                 Secure Infrastructure
               </h3>
               <p className="text-slate-300">
-                ITAR-compliant cloud architecture, zero-trust security,
-                DevSecOps pipelines, and air-gapped system deployments for
-                sensitive operations.
+                Secure cloud architecture, zero-trust security, DevSecOps
+                pipelines, and air-gapped system deployments for sensitive
+                operations.
               </p>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-900 rounded-lg">
-              <svg
-                className="w-5 h-5 text-blue-400 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span className="text-blue-300 font-medium">
-                SAM.gov UEI: SKLB9XKRZGR5 | CAGE Code Pending
-              </span>
             </div>
           </div>
         </div>
@@ -479,7 +457,7 @@ export default function Home() {
                 Cybersecurity
               </h3>
               <p className="text-sm text-slate-400">
-                ITAR compliance & analysis
+                Security & threat analysis
               </p>
             </div>
 
@@ -555,7 +533,7 @@ export default function Home() {
                     <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
                   </div>
                   <p className="ml-3 text-slate-300">
-                    SAM.gov Registered Government Contractor
+                    Government & Defense Mission Focus
                   </p>
                 </div>
                 <div className="flex items-center">
@@ -563,7 +541,7 @@ export default function Home() {
                     <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
                   </div>
                   <p className="ml-3 text-slate-300">
-                    ITAR Compliance & Security Clearance Ready
+                    Security Clearance & Compliance Ready
                   </p>
                 </div>
                 <div className="flex items-center">
@@ -731,7 +709,7 @@ export default function Home() {
           <div className="text-center text-slate-400">
             <p>&copy; 2025 Applied AI Systems LLC. All rights reserved.</p>
             <p className="mt-2 text-sm">
-              Registered Government Contractor | SAM.gov | ITAR Compliant
+              Government Contract Vehicles Available Upon Request
             </p>
           </div>
         </div>
