@@ -65,8 +65,8 @@ export default function Home() {
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-300">
             Specialized technical solutions for defense, aerospace, and
-            government missions. From intelligence systems to commercial space
-            applications - accelerating mission success through advanced
+            government applications. From intelligence systems to commercial
+            space platforms - accelerating project success through advanced
             technology.
           </p>
           <div className="mt-10 flex justify-center gap-x-6">
@@ -94,7 +94,7 @@ export default function Home() {
               Defense & Government Solutions
             </h2>
             <p className="mt-4 text-lg text-slate-300">
-              Advanced solutions for classified and sensitive mission systems
+              Advanced capabilities for classified and sensitive environments
             </p>
           </div>
 
@@ -122,7 +122,7 @@ export default function Home() {
               <p className="text-slate-300">
                 Classified data analysis, threat intelligence processing,
                 malware reverse engineering, and real-time decision support
-                systems for defense missions.
+                systems for defense applications.
               </p>
             </div>
 
@@ -149,7 +149,7 @@ export default function Home() {
               <p className="text-slate-300">
                 Ionospheric research, Software Defined Radio, satellite
                 communications, space physics modeling, and RF signal analysis
-                for defense applications.
+                capabilities.
               </p>
             </div>
 
@@ -521,11 +521,10 @@ export default function Home() {
                 Mission-Focused Excellence
               </h2>
               <p className="mt-4 text-lg text-slate-300">
-                Applied AI Systems LLC delivers specialized technical solutions
-                across two primary markets: classified defense/government
-                systems and commercial aerospace/industry applications. Our
-                AI-powered approach accelerates project delivery while reducing
-                costs.
+                Applied AI Systems LLC specializes in technical solutions across
+                two primary markets: defense/government systems and commercial
+                aerospace/industry applications. Our AI-powered approach
+                accelerates project delivery while reducing costs.
               </p>
               <div className="mt-8 space-y-4">
                 <div className="flex items-center">
@@ -709,7 +708,8 @@ export default function Home() {
           <div className="text-center text-slate-400">
             <p>&copy; 2025 Applied AI Systems LLC. All rights reserved.</p>
             <p className="mt-2 text-sm">
-              Government Contract Vehicles Available Upon Request
+              Professional Services • Technical Consulting • Platform
+              Development
             </p>
           </div>
         </div>
