@@ -5,10 +5,11 @@
 [![Performance](https://img.shields.io/badge/lighthouse-95%2B-brightgreen.svg)](https://developers.google.com/speed/pagespeed/insights/)
 [![Accessibility](https://img.shields.io/badge/a11y-AA-blue.svg)](https://www.w3.org/WAI/WCAG2AA-Conformance)
 
-**Government contractor specializing in AI, space physics, and RF systems**
+Government contractor specializing in AI, space physics, and RF systems
 
 🌐 **Live Site**: [https://applied-ai-systems.com](https://applied-ai-systems.com)
 🚀 **Status**: Production Ready - Government Grade Quality
+✅ **CI/CD**: Full Vercel deployment pipeline active
 
 ---
 
@@ -171,16 +172,14 @@ npm test
 
 MIT License - See [LICENSE](LICENSE) for details.
 
-**Copyright (c) 2025 Applied AI Systems LLC**
+Copyright (c) 2025 Applied AI Systems LLC
 
 ---
 
-<div align="center">
+## Technology Badges
 
-**🛡️ Government Contractor Grade Quality | 🚀 Production Ready | 🔒 Security First**
+🛡️ Government Contractor Grade Quality | 🚀 Production Ready | 🔒 Security First
 
 [![Built with Next.js](https://img.shields.io/badge/built%20with-Next.js-black)](https://nextjs.org/)
 [![Deployed on Vercel](https://img.shields.io/badge/deployed%20on-Vercel-black)](https://vercel.com/)
 [![TypeScript](https://img.shields.io/badge/typed%20with-TypeScript-blue)](https://www.typescriptlang.org/)
-
-</div>
