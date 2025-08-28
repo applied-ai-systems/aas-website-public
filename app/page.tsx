@@ -94,7 +94,8 @@ export default function Home() {
               Defense & Government Solutions
             </h2>
             <p className="mt-4 text-lg text-slate-300">
-              Advanced capabilities for classified and sensitive environments
+              Advanced technical capabilities for defense and government
+              applications
             </p>
           </div>
 

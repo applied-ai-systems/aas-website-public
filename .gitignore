@@ -84,3 +84,4 @@ playwright-report/
 # ESLint
 eslint-report.json
 .eslintcache
+.env*.local
