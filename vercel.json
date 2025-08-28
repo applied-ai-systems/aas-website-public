@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "public": true,
+  "functions": {},
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
