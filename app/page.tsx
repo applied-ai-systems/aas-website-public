@@ -61,11 +61,60 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center lg:pt-32">
+      <section className="relative bg-slate-900 overflow-hidden">
+        {/* Space Domain Awareness Background GIF */}
+        <div className="absolute inset-0 opacity-30">
+          <div
+            className="absolute inset-0 bg-center bg-cover"
+            style={{
+              backgroundImage: `url('/images/geostationary-orbit.gif')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }}
+          ></div>
+          {/* Optional overlay to darken the GIF for text readability */}
+          <div className="absolute inset-0 bg-slate-900 bg-opacity-60"></div>
+        </div>
+
+        {/* Animated Grid Overlay (lighter) */}
+        <div className="absolute inset-0 opacity-5">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+                             linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)`,
+              backgroundSize: '50px 50px',
+              animation: 'grid-move 20s linear infinite',
+            }}
+          ></div>
+        </div>
+
+        {/* Floating Data Particles */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400 rounded-full opacity-60 animate-pulse"></div>
+          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-green-400 rounded-full opacity-80 animate-ping"></div>
+          <div className="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-purple-400 rounded-full opacity-50 animate-bounce"></div>
+          <div
+            className="absolute top-1/2 right-1/4 w-1 h-1 bg-yellow-400 rounded-full opacity-70"
+            style={{
+              animation: 'float 6s ease-in-out infinite',
+            }}
+          ></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center lg:pt-32 relative z-10">
           <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-white sm:text-7xl">
             <span className="relative whitespace-nowrap text-blue-400">
               <span className="relative">Advanced</span>
+              {/* Animated underline */}
+              <span
+                className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-400 to-green-400 rounded-full animate-pulse"
+                style={{
+                  width: '100%',
+                  animation: 'underline-expand 2s ease-out forwards',
+                }}
+              ></span>
             </span>{' '}
             Technical Solutions
           </h1>
@@ -136,7 +185,7 @@ export default function Home() {
                     <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
                   </div>
                   <p className="ml-3 text-slate-300">
-                    Platform Partnerships: Snowflake, Databricks, OpenAI
+                    Platform Expertise: Snowflake, Databricks, OpenAI
                   </p>
                 </div>
                 <div className="flex items-center">
@@ -210,10 +259,12 @@ export default function Home() {
           </div>
 
           <div className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <div className="text-center group">
+              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3 tech-icon-hover relative overflow-hidden">
+                {/* Animated background pulse */}
+                <div className="absolute inset-0 bg-blue-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-pulse"></div>
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-8 h-8 text-white relative z-10"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -225,19 +276,28 @@ export default function Home() {
                     d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
                   />
                 </svg>
+                {/* Data flow particles */}
+                <div
+                  className="absolute top-2 right-2 w-1 h-1 bg-green-400 rounded-full opacity-0 group-hover:opacity-100"
+                  style={{
+                    animation: 'data-flow 2s ease-in-out infinite',
+                  }}
+                ></div>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
                 AI & Machine Learning
               </h3>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
                 Advanced modeling & MLOps
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <div className="text-center group">
+              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3 tech-icon-hover relative overflow-hidden">
+                {/* Animated background pulse */}
+                <div className="absolute inset-0 bg-blue-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-pulse"></div>
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-8 h-8 text-white relative z-10"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -249,19 +309,28 @@ export default function Home() {
                     d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
+                {/* Data flow particles */}
+                <div
+                  className="absolute top-2 right-2 w-1 h-1 bg-green-400 rounded-full opacity-0 group-hover:opacity-100"
+                  style={{
+                    animation: 'data-flow 2s ease-in-out infinite 0.3s',
+                  }}
+                ></div>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
                 Space Physics
               </h3>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
                 Ionospheric & plasma research
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <div className="text-center group">
+              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3 tech-icon-hover relative overflow-hidden">
+                {/* Animated background pulse */}
+                <div className="absolute inset-0 bg-blue-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-pulse"></div>
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-8 h-8 text-white relative z-10"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -273,19 +342,28 @@ export default function Home() {
                     d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"
                   />
                 </svg>
+                {/* Radio wave particles */}
+                <div
+                  className="absolute top-2 right-2 w-1 h-1 bg-green-400 rounded-full opacity-0 group-hover:opacity-100"
+                  style={{
+                    animation: 'radar-sweep 3s linear infinite 0.6s',
+                  }}
+                ></div>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
                 Software Defined Radio
               </h3>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
                 RF signal processing & analysis
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <div className="text-center group">
+              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3 tech-icon-hover relative overflow-hidden">
+                {/* Animated background pulse */}
+                <div className="absolute inset-0 bg-blue-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-pulse"></div>
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-8 h-8 text-white relative z-10"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -297,17 +375,28 @@ export default function Home() {
                     d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
                   />
                 </svg>
+                {/* Cloud data particles */}
+                <div
+                  className="absolute top-2 left-2 w-1 h-1 bg-blue-300 rounded-full opacity-0 group-hover:opacity-100"
+                  style={{
+                    animation: 'float 2.5s ease-in-out infinite 0.9s',
+                  }}
+                ></div>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
                 Cloud Architecture
               </h3>
-              <p className="text-sm text-slate-400">AWS • GCP • Azure</p>
+              <p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
+                AWS • GCP • Azure
+              </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <div className="text-center group">
+              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3 tech-icon-hover relative overflow-hidden">
+                {/* Animated background pulse */}
+                <div className="absolute inset-0 bg-blue-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-pulse"></div>
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-8 h-8 text-white relative z-10"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -325,17 +414,28 @@ export default function Home() {
                     d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                   />
                 </svg>
+                {/* Container orchestration particles */}
+                <div
+                  className="absolute bottom-2 left-2 w-1 h-1 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-100"
+                  style={{
+                    animation: 'pulse-ring 2s ease-out infinite 1.2s',
+                  }}
+                ></div>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
                 Kubernetes & DevOps
               </h3>
-              <p className="text-sm text-slate-400">Container orchestration</p>
+              <p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
+                Container orchestration
+              </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <div className="text-center group">
+              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3 tech-icon-hover relative overflow-hidden">
+                {/* Animated background pulse */}
+                <div className="absolute inset-0 bg-red-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-pulse"></div>
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-8 h-8 text-white relative z-10"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -347,19 +447,28 @@ export default function Home() {
                     d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
                   />
                 </svg>
+                {/* Security alert particles */}
+                <div
+                  className="absolute top-2 right-2 w-1 h-1 bg-red-400 rounded-full opacity-0 group-hover:opacity-100"
+                  style={{
+                    animation: 'pulse-ring 1.5s ease-out infinite 1.5s',
+                  }}
+                ></div>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-red-400 transition-colors">
                 Cybersecurity
               </h3>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
                 Security & threat analysis
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <div className="text-center group">
+              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3 tech-icon-hover relative overflow-hidden">
+                {/* Animated background pulse */}
+                <div className="absolute inset-0 bg-green-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-pulse"></div>
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-8 h-8 text-white relative z-10"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -371,19 +480,28 @@ export default function Home() {
                     d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
                   />
                 </svg>
+                {/* Data stream particles */}
+                <div
+                  className="absolute bottom-2 right-2 w-1 h-1 bg-green-400 rounded-full opacity-0 group-hover:opacity-100"
+                  style={{
+                    animation: 'matrix-fall 3s linear infinite 1.8s',
+                  }}
+                ></div>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-green-400 transition-colors">
                 Data Engineering
               </h3>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
                 Real-time pipelines & analytics
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+            <div className="text-center group">
+              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3 tech-icon-hover relative overflow-hidden">
+                {/* Animated background pulse */}
+                <div className="absolute inset-0 bg-purple-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-pulse"></div>
                 <svg
-                  className="w-8 h-8 text-white"
+                  className="w-8 h-8 text-white relative z-10"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -395,11 +513,18 @@ export default function Home() {
                     d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
                   />
                 </svg>
+                {/* Integration flow particles */}
+                <div
+                  className="absolute top-2 left-2 w-1 h-1 bg-purple-400 rounded-full opacity-0 group-hover:opacity-100"
+                  style={{
+                    animation: 'data-flow 2.5s ease-in-out infinite 2.1s',
+                  }}
+                ></div>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
                 Systems Integration
               </h3>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">
                 SE&I & platform engineering
               </p>
             </div>
@@ -408,8 +533,41 @@ export default function Home() {
       </section>
 
       {/* Markets Section */}
-      <section id="markets" className="py-20 bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="markets"
+        className="py-20 bg-slate-900 relative overflow-hidden"
+      >
+        {/* Background Circuit Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <svg className="w-full h-full" viewBox="0 0 400 400" fill="none">
+            <defs>
+              <pattern
+                id="circuit"
+                patternUnits="userSpaceOnUse"
+                width="40"
+                height="40"
+              >
+                <path
+                  d="M0 20 L20 20 L20 0"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  fill="none"
+                  className="text-blue-400"
+                />
+                <circle
+                  cx="20"
+                  cy="20"
+                  r="2"
+                  fill="currentColor"
+                  className="text-green-400"
+                />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#circuit)" />
+          </svg>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Markets We Serve
@@ -418,6 +576,10 @@ export default function Home() {
               Advanced technical solutions across defense, aerospace, and
               commercial industries
             </p>
+            {/* Animated divider */}
+            <div className="mt-8 flex justify-center">
+              <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent animate-pulse"></div>
+            </div>
           </div>
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -528,8 +690,8 @@ export default function Home() {
                 />
               </svg>
               <span className="text-blue-300 font-medium">
-                Platform Partners: Snowflake • Databricks • AWS • GCP • Azure •
-                OpenAI
+                Platform Capabilities: Snowflake • Databricks • AWS • GCP •
+                Azure • OpenAI
               </span>
             </div>
           </div>
