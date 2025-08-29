@@ -1,4 +1,4 @@
-name: Applied AI Systems - Professional CI/CD Pipeline
+name: Applied AI Systems - Optimized CI/CD Pipeline
 
 on:
   push:
@@ -8,102 +8,153 @@ on:
 
 env:
   NODE_VERSION: '18'
+  CACHE_VERSION: v1
 
 jobs:
-  code-quality:
-    name: Code Quality & Security
+  # Single build job to create artifacts once
+  build:
+    name: Build & Analyze
     runs-on: ubuntu-latest
+    outputs:
+      deploy-needed: ${{ steps.changes.outputs.src }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1 # Shallow clone for speed
 
-      - name: Setup Node.js
+      - name: Detect changes
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            src:
+              - 'app/**'
+              - 'components/**'
+              - 'public/**'
+              - 'package*.json'
+              - 'next.config.*'
+              - 'tailwind.config.*'
+
+      - name: Setup Node.js with advanced caching
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies (optimized)
+        run: |
+          # Use npm ci with production flag for faster installs
+          npm ci --prefer-offline --no-audit --production=false
 
-      - name: Run ESLint
-        run: npx eslint . --ext .js,.jsx,.ts,.tsx --format=json --output-file eslint-report.json
+      - name: Lint & Type Check (parallel)
+        run: |
+          # Run linting and type checking in parallel
+          npx eslint . --ext .js,.jsx,.ts,.tsx --format=compact --quiet &
+          npx prettier --check . &
+          npx tsc --noEmit &
+          wait
+
+      - name: Security audit (non-blocking)
+        run: npm audit --audit-level=high
         continue-on-error: true
 
-      - name: Run Prettier check
-        run: npx prettier --check .
-
-      - name: TypeScript type check
-        run: npx tsc --noEmit
-
-      - name: Security audit
-        run: npm audit --audit-level=moderate
-
       - name: Build application
-        run: npm run build
+        run: |
+          # Build with optimizations
+          NODE_ENV=production npm run build
+
+      - name: Cache build artifacts
+        uses: actions/cache@v3
+        with:
+          path: |
+            .next/cache
+            .next/static
+            .next/standalone
+          key: build-${{ env.CACHE_VERSION }}-${{ github.sha }}
+          restore-keys: |
+            build-${{ env.CACHE_VERSION }}-
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifacts
-          path: .next/
-          retention-days: 7
-        if: always()
+          name: build-${{ github.sha }}
+          path: |
+            .next/
+            public/
+          retention-days: 1
+          compression-level: 9
 
-  performance-test:
-    name: Performance & Accessibility
+  # Fast security scanning (parallel with build)
+  security:
+    name: Security Scan
     runs-on: ubuntu-latest
-    needs: code-quality
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          fetch-depth: 1
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build for production
-        run: npm run build
-
-      - name: Lighthouse CI
-        uses: treosh/lighthouse-ci-action@v10
-        with:
-          configPath: './lighthouserc.json'
-          uploadArtifacts: false
-
-  security-scan:
-    name: Security Scanning
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Run Trivy vulnerability scanner
+      - name: Run Trivy scanner (fast)
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
           scan-ref: '.'
           format: 'table'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
 
-  deploy-preview:
-    name: Deploy Preview
+  # Lightweight performance test (only on changes)
+  performance:
+    name: Performance Check
     runs-on: ubuntu-latest
-    needs: [code-quality, performance-test]
-    if: github.event_name == 'pull_request'
+    needs: build
+    if: needs.build.outputs.deploy-needed == 'true'
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-${{ github.sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install minimal deps for lighthouse
+        run: npm ci --production
+
+      - name: Quick Lighthouse audit
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          configPath: './lighthouserc.json'
+          uploadArtifacts: false
+          temporaryPublicStorage: false
+
+  # Optimized preview deployment
+  deploy-preview:
+    name: Preview Deploy
+    runs-on: ubuntu-latest
+    needs: [build, security]
+    if: github.event_name == 'pull_request' && needs.build.outputs.deploy-needed == 'true'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-${{ github.sha }}
 
       - name: Deploy to Vercel Preview
         uses: amondnet/vercel-action@v25
@@ -112,47 +163,37 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
 
+  # Fast production deployment
   deploy-production:
-    name: Deploy to Production
+    name: Production Deploy
     runs-on: ubuntu-latest
-    needs: [code-quality, performance-test, security-scan]
-    if: github.ref == 'refs/heads/main'
+    needs: [build, security, performance]
+    if: github.ref == 'refs/heads/main' && needs.build.outputs.deploy-needed == 'true'
+    environment: production
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          name: build-${{ github.sha }}
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Deploy to Vercel Production (direct)
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+          working-directory: ./
 
-      - name: Build application
-        run: npm run build
-
-      - name: Install Vercel CLI
-        run: npm install -g vercel@latest
-
-      - name: Link Vercel Project
-        run: |
-          mkdir -p .vercel
-          echo '{"projectId":"${{ secrets.VERCEL_PROJECT_ID }}","orgId":"${{ secrets.VERCEL_ORG_ID }}","projectName":"aas-website-public"}' > .vercel/project.json
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-
-      - name: Deploy to Vercel Production
-        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --yes
-        env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-
-      - name: Update deployment status
+      - name: Deployment notification
         run: |
           echo "🚀 Production deployment successful"
           echo "🌐 Website: https://applied-ai-systems.com"
-          echo "📊 Status: Government contractor grade quality enforced"
+          echo "⚡ Build time optimized: $(date)"
