@@ -2,6 +2,8 @@
 // Licensed under the MIT License - see LICENSE file for details
 // Government contractor - professional standards enforced
 
+import NeuralBackground from '../components/NeuralBackground';
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-slate-900">
@@ -62,43 +64,21 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative bg-slate-900 overflow-hidden">
-        {/* Space Domain Awareness Background GIF */}
-        <div className="absolute inset-0 opacity-30">
-          <div
-            className="absolute inset-0 bg-center bg-cover"
-            style={{
-              backgroundImage: `url('/images/geostationary-orbit.gif')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-            }}
-          ></div>
-          {/* Optional overlay to darken the GIF for text readability */}
-          <div className="absolute inset-0 bg-slate-900 bg-opacity-60"></div>
-        </div>
+        {/* Neural Network Background Animation */}
+        <NeuralBackground />
 
-        {/* Animated Grid Overlay (lighter) */}
-        <div className="absolute inset-0 opacity-5">
+        {/* Subtle gradient overlay for depth */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/30 via-transparent to-slate-900/50"></div>
+
+        {/* Technical data grid (subtle) */}
+        <div className="absolute inset-0 opacity-3">
           <div
             className="absolute inset-0"
             style={{
               backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
                              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)`,
-              backgroundSize: '50px 50px',
-              animation: 'grid-move 20s linear infinite',
-            }}
-          ></div>
-        </div>
-
-        {/* Floating Data Particles */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400 rounded-full opacity-60 animate-pulse"></div>
-          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-green-400 rounded-full opacity-80 animate-ping"></div>
-          <div className="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-purple-400 rounded-full opacity-50 animate-bounce"></div>
-          <div
-            className="absolute top-1/2 right-1/4 w-1 h-1 bg-yellow-400 rounded-full opacity-70"
-            style={{
-              animation: 'float 6s ease-in-out infinite',
+              backgroundSize: '60px 60px',
+              animation: 'grid-move 30s linear infinite',
             }}
           ></div>
         </div>
